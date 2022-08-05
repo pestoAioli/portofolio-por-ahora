@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import gsap from 'gsap';
-
+import { TeapotGeometry } from 'three/examples/jsm/geometries/TeapotGeometry';
 /**
  * Base
  */
@@ -21,7 +21,7 @@ const material = new THREE.MeshStandardMaterial({
 
 const objectsDistance = 4;
 
-const mesh3 = new THREE.Mesh(
+const mesh4 = new THREE.Mesh(
   new THREE.TorusGeometry(1, 0.4, 16, 60),
   material
 );
@@ -33,26 +33,32 @@ const mesh1 = new THREE.Mesh(
   new THREE.DodecahedronGeometry(0.69, 0),
   material
 );
+const mesh3 = new THREE.Mesh(
+  new TeapotGeometry(0.69, 8),
+  material
+);
 
 mesh1.position.y = - objectsDistance * 0;
 mesh2.position.y = - objectsDistance;
 mesh3.position.y = - objectsDistance * 2;
+mesh4.position.y = - objectsDistance * 3;
 
 mesh1.position.x = 2;
 mesh2.position.x = -2;
 mesh3.position.x = 2;
+mesh4.position.x = -2;
 
-scene.add(mesh1, mesh2, mesh3);
+scene.add(mesh1, mesh2, mesh3, mesh4);
 
 
 /**
 * Particles
 **/
-const particlesCount = 200;
+const particlesCount = 400;
 const positions = new Float32Array(particlesCount * 3);
 for (let i = 0; i < particlesCount; i++) {
   positions[i * 3 + 0] = (Math.random() - 0.5) * 10;
-  positions[i * 3 + 1] = objectsDistance * 0.5 - Math.random() * objectsDistance * 3;
+  positions[i * 3 + 1] = objectsDistance * 0.5 - Math.random() * objectsDistance * 6;
   positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
 };
 
@@ -68,7 +74,7 @@ const particlesMaterial = new THREE.PointsMaterial({
 const particles = new THREE.Points(particlesGeometry, particlesMaterial);
 scene.add(particles);
 
-const sectionMeshes = [mesh1, mesh2, mesh3];
+const sectionMeshes = [mesh1, mesh2, mesh3, mesh4];
 /**
 * Lights
 **/
@@ -101,17 +107,20 @@ window.addEventListener('resize', () => {
     mesh1.position.x = 0;
     mesh2.position.x = 0;
     mesh3.position.x = 0;
+    mesh4.position.x = 0;
 
   }
   if (sizes.width < 1200) {
     mesh1.position.x = 0.8;
     mesh2.position.x = -0.5;
     mesh3.position.x = 0.8;
+    mesh4.position.x = -0.5;
   }
   if (sizes.width > 1200) {
     mesh1.position.x = 2;
     mesh2.position.x = -2;
     mesh3.position.x = 2;
+    mesh4.position.x = -2;
   }
 });
 
@@ -145,6 +154,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  */
 
 const raycaster = new THREE.Raycaster();
+let deviceCheck = false;
 
 const mouse = new THREE.Vector2();
 
@@ -220,7 +230,13 @@ const animate = () => {
     mesh.rotation.x += deltaTime * 0.1
     mesh.rotation.y += deltaTime * 0.2
   }
-  if (sizes.width > 400) {
+  if (sizes.width > 500) {
+    deviceCheck = true;
+  }
+  if (sizes.width < 500) {
+    deviceCheck = false;
+  }
+  if (deviceCheck) {
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(scene.children);
     if (intersects.length) {

@@ -33,7 +33,6 @@ background: #1e1a20;
     position: relative;
     font-family: rickyFont;
     color: #e39d52;
-    text-transform: uppercase;
     font-weight: 900;
     font-size: 7vmin;
     padding-left: 10%;
@@ -42,14 +41,15 @@ background: #1e1a20;
 }
 .section2
 {
-    display: flex; 
-   
+    display: flex;  
     align-items: center;
-    height: 100vh;
+    height: 90vh;
+    margin-left: 10px;
+    margin-right: 10px;
     font-family: rickyFont;
     color: #d69f92;  
     font-weight: 900;
-    font-size: 7vmin;
+    font-size: 5vmin;
     padding-left: 10%;
     padding-right: 10%;
     scroll-snap-align: end;
@@ -62,7 +62,7 @@ section:nth-child(odd)
 
 @font-face {
   font-family: rickyFont;
-  src: url('/public/vergilia.ttf');
+  src: url('../public/vergilia.ttf');
 }
 
 .modal {
@@ -70,13 +70,15 @@ section:nth-child(odd)
   flex-direction: column;
   position: fixed;
   z-index: 2000;
-  width: 100vw;
-  height: 100vh;
+  width: 50vw;
+  height: 50vh;
   background-color: hsl(159, 21%, 22%, .97);
+  border: hsl(159, 36%, 50%, .56) solid 3px;
+  border-radius: 8px;
   visibility: hidden ;
   transition: all 0.3s ease;
-  top: 0;
-  left: 0;
+  top: 20;
+  left: 20;
   display: flex;
   align-items: center;
   justify-content: center;
