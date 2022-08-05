@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+::selection{
+  background:rgb(142, 82, 227)
+}
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+html
+{
+background: #1e1a20; 
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+   }
+.webgl
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+
+.section
+{
+    display: flex; 
+    align-items: center;
+    height: 100vh;
+    position: relative;
+    font-family: rickyFont;
+    color: #e39d52;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 7vmin;
+    padding-left: 10%;
+    padding-right: 10%;
+    scroll-snap-align: end;
+}
+.section2
+{
+    display: flex; 
+   
+    align-items: center;
+    height: 100vh;
+    font-family: rickyFont;
+    color: #d69f92;  
+    font-weight: 900;
+    font-size: 7vmin;
+    padding-left: 10%;
+    padding-right: 10%;
+    scroll-snap-align: end;
+}
+
+section:nth-child(odd)
+{
+    justify-content: flex-end;
+}
+
+@font-face {
+  font-family: rickyFont;
+  src: url('/public/vergilia.ttf');
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 2000;
+  width: 100vw;
+  height: 100vh;
+  background-color: hsl(159, 21%, 22%, .97);
+  visibility: hidden ;
+  transition: all 0.3s ease;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.open {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+  }
+  
+
